@@ -1,0 +1,12 @@
+{
+    "name": "more-planets-per-planet",
+    "version": "0.0.1",
+    "title": "More Planets Per Planet",
+    "author": "b.tumelero",
+    "description": Merges Vulcanus, Nauvis and Fulgora.",
+    "factorio_version": "2.0",
+    "dependencies": [
+        "base >= 2.0",
+        "space-age >= 2.0"
+    ]
+}
