@@ -1,4 +1,4 @@
-Factorio Mod to move resources and researches from Fulgora and Vulcanus to Nauvis.\
+Factorio Mod to move resources and researches from Fulgora and Vulcanus to Nauvis.
 
 Changes:\
     - Fulgora and Vulcanus no longer exist. Nauvis mostly untouched. Aquilo and Gleba untouched.\
