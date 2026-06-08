@@ -10,4 +10,4 @@ Changes:\
     - Recycling and Tungsten Carbide triggers techs changed to mine one Scrap and one Tungsten Ore respectively.\
     - Recycling no longer yields Ice and can be set to yield only Holmium ore.\
   Balancing:\
-    - Removed Acid Neutralisation.\
+    - Removed Acid Neutralisation.
