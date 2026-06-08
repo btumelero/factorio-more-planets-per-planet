@@ -8,6 +8,6 @@ Changes:\
     - Default import location from Fulgora and Vulcanus items changed to Nauvis.\
     - Recycling, Calcite Processing and Tungsten Carbide prerequisites changed to Purple Science, LDS, Blue Circuits and Concrete.\
     - Recycling and Tungsten Carbide triggers techs changed to mine one Scrap and one Tungsten Ore respectively.\
+    - Recycling no longer yields Ice and can be set to yield only Holmium ore.\
   Balancing:\
     - Removed Acid Neutralisation.\
-    - Recycling yields only Holmium Ore.
