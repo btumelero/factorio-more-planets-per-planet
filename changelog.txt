@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 07-06-2026
+  Changes:
+    - Recycling yields can now be toggled between either Holmium Ore only or iceless vanilla.
+  Bugfixes:
+    - Tungsten Ore mining now works properly.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.1
 Date: 26-05-2026
   Changes:

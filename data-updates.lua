@@ -1,9 +1,27 @@
-local nauvis_map_gen = data.raw.planet.nauvis.map_gen_settings
+local nauvis_map_gen = data.raw["planet"]["nauvis"].map_gen_settings
 local technology = data.raw.technology
 local recipe = data.raw.recipe
 
-data.raw.planet.vulcanus.map_gen_settings = nil
-data.raw.planet.fulgora.map_gen_settings = nil
+data.raw["autoplace-control"]["fulgora_islands"].hidden = true
+data.raw["autoplace-control"]["fulgora_cliff"].hidden = true
+data.raw["planet"]["fulgora"].map_gen_settings = nil
+data.raw["autoplace-control"]["sulfuric_acid_geyser"].hidden = true
+data.raw["autoplace-control"]["vulcanus_coal"].hidden = true
+data.raw["autoplace-control"]["vulcanus_volcanism"].hidden = true
+data.raw["planet"]["vulcanus"].map_gen_settings = nil
+
+local reorder = data.raw["autoplace-control"]["scrap"].order
+data.raw["autoplace-control"]["scrap"].order = data.raw["autoplace-control"]["gleba_stone"].order
+data.raw["autoplace-control"]["gleba_stone"].order = reorder
+
+data.raw["planet"]["fulgora"].hidden = true
+data.raw["planet"]["vulcanus"].hidden = true
+
+data.raw["space-connection"]["fulgora-aquilo"] = nil
+data.raw["space-connection"]["gleba-fulgora"] = nil
+data.raw["space-connection"]["nauvis-fulgora"] = nil
+data.raw["space-connection"]["nauvis-vulcanus"] = nil
+data.raw["space-connection"]["vulcanus-gleba"] = nil
 
 nauvis_map_gen.autoplace_controls["scrap"] = {}
 nauvis_map_gen.autoplace_controls["calcite"] = {}
@@ -17,12 +35,6 @@ nauvis_map_gen.property_expression_names["entity:calcite:probability"] = "vulcan
 nauvis_map_gen.property_expression_names["entity:calcite:richness"] = "vulcanus_calcite_richness"
 nauvis_map_gen.property_expression_names["entity:tungsten-ore:probability"] = "vulcanus_tungsten_ore_probability"
 nauvis_map_gen.property_expression_names["entity:tungsten-ore:richness"] = "vulcanus_tungsten_ore_richness"
-
-data.raw["space-location"]["fulgora"].hidden = true
-data.raw["space-location"]["vulcanus"].hidden = true
-
-data.raw["tips-and-tricks-item"]["fulgora-briefing"] = nil
-data.raw["tips-and-tricks-item"]["vulcanus-briefing"] = nil
 
 technology["foundation"].enabled = false
 technology["lightning-collector"].enabled = false
@@ -43,14 +55,32 @@ technology["tungsten-carbide"].prerequisites = {"production-science-pack", "low-
 technology["recycling"].research_trigger = {type = "mine-entity", entity = "scrap", count = 1}
 technology["tungsten-carbide"].research_trigger = {type = "mine-entity", entity = "tungsten-ore", count = 1}
 
-recipe["scrap-recycling"].results = {
-	{type = "item", name = "holmium-ore", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false}
-}
+data.raw["mining-drill"]["electric-mining-drill"].resource_categories  = {"basic-solid", "hard-solid"}
+
+local scrap_recipe_setting = settings.startup["scrap-recipe"].value
+if scrap_recipe_setting == "no-ice" then
+    data.raw.recipe["scrap-recycling"].results = {
+		{type = "item", name = "iron-gear-wheel", amount = 1, probability = 0.20, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "solid-fuel", amount = 1, probability = 0.07, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "concrete", amount = 1, probability = 0.06, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "stone", amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "steel-plate", amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "battery", amount = 1, probability = 0.04, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "copper-cable", amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "advanced-circuit", amount = 1, probability = 0.03, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "processing-unit", amount = 1, probability = 0.02, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "low-density-structure", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false},
+		{type = "item", name = "holmium-ore", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false}
+	}
+elseif scrap_recipe_setting == "holmium-only" then
+	recipe["scrap-recycling"].results = {
+		{type = "item", name = "holmium-ore", amount = 1, probability = 0.01, show_details_in_recipe_tooltip = false}
+	}
+end
 
 recipe["foundation"].enabled = false
 recipe["lightning-collector"].enabled = false
 recipe["lightning-rod"].enabled = false
-recipe["rail-support-foundations"].enabled = false
 recipe["acid-neutralisation"].enabled = false
 recipe["molten-copper-from-lava"].enabled = false
 recipe["molten-iron-from-lava"].enabled = false
@@ -59,7 +89,6 @@ recipe["steam-condensation"].enabled = false
 recipe["foundation"].hidden = true
 recipe["lightning-collector"].hidden = true
 recipe["lightning-rod"].hidden = true
-recipe["rail-support-foundations"].hidden = true
 recipe["acid-neutralisation"].hidden = true
 recipe["molten-copper-from-lava"].hidden = true
 recipe["molten-iron-from-lava"].hidden = true
